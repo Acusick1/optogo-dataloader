@@ -1,8 +1,8 @@
 import logging
-from logging import config
 from pathlib import Path
-from pydantic import BaseSettings
 from typing import Any, Optional
+
+from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
@@ -34,4 +34,6 @@ class Paths(BaseSettings):
 settings = Settings()
 paths = Paths()
 
-logging.config.fileConfig(paths.base_path / 'logging.ini', disable_existing_loggers=True)
+logging.config.fileConfig(
+    paths.base_path / "logging.ini", disable_existing_loggers=True
+)
