@@ -1,8 +1,7 @@
 import logging
 
+from packages.shared.sql import database, models, schemas
 from sqlalchemy.orm import Session
-
-from shared.sql import database, models, schemas
 
 LOGGER = logging.getLogger(__name__)
 
