@@ -1,23 +1,19 @@
-[tool.poetry]
+[project]
 name = "optogo-dataloader"
 version = "0.1.0"
-description = ""
-authors = ["Andrew Cusick <andrewcusick13@outlook.com>"]
-readme = "README.md"
-packages = [{include = "optogo_dataloader"}]
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic[dotenv] <2.0",
+    "sqlalchemy >=2.0.15",
+    "sqlalchemy-utils >=0.41.1",
+    "pymongo >=4.3.3",
+    "pika >=1.3.2",
+    "psycopg2-binary >=2.9.6",
+    "pytest>=8.3.3",
+]
 
-[tool.poetry.dependencies]
-python = "^3.10"
-pydantic = {extras = ["dotenv"], version = "^1.10.7"}
-sqlalchemy = "^2.0.15"
-sqlalchemy-utils = "^0.41.1"
-pymongo = "^4.3.3"
-pika = "^1.3.2"
-psycopg2-binary = "^2.9.6"
-ruff = "^0.6.2"
-pre-commit = "^3.8.0"
-
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.uv]
+dev-dependencies = [
+    "ruff >=0.6.2",
+    "pre-commit >=3.8.0",
+]
