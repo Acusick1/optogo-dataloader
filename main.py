@@ -3,7 +3,7 @@ from datetime import datetime
 from time import sleep
 
 from packages.config import paths, settings
-from packages.shared.utils.queue import consume
+from shared.utils.queue import consume
 
 from loader.main import post_trip
 
