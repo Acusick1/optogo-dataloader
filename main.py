@@ -3,9 +3,8 @@ from datetime import datetime
 from time import sleep
 
 from packages.config import paths, settings
-from shared.utils.queue import consume
-
-from loader.main import post_trip
+from packages.dataloader.main.dataloader import post_trip
+from packages.shared.utils.queue import consume
 
 
 def callback(ch, method, properties, body):
