@@ -2,7 +2,7 @@ import pickle
 from datetime import datetime
 from time import sleep
 
-from packages.config import paths, settings
+from packages.config import global_settings, paths
 from packages.dataloader.main.dataloader import post_trip
 from packages.shared.utils.queue import consume
 
@@ -29,4 +29,4 @@ def callback(ch, method, properties, body):
 
 
 if __name__ == "__main__":
-    consume(queue=settings.flight_loader_queue, callback=callback)
+    consume(queue=global_settings.flight_loader_queue, callback=callback)

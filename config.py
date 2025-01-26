@@ -1,20 +1,11 @@
 import logging.config
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
-    db_username: str
-    db_password: str
-    db_host: str
-    db_port: int
-    db_name: str
-    flight_loader_queue = "flight-put"
-    date_fmt: str = "%Y-%m-%d"
-    cloudamqp_url: Optional[str] = "amqp://guest:guest@localhost:5672/%2F"
-
     class Config:
         env_file = Path(__file__).resolve().parent / ".env"
 
