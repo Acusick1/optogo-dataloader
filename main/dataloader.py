@@ -16,7 +16,10 @@ def post_trip(trip: schemas.TripBase, request_id: int):
 
     with Session(database.engine) as session:
         journey_dbs = []
-        for journey in trip.journeys:
+        for journey in trip.journey_1, trip.journey_2:
+            if journey is None:
+                continue
+
             flights = journey.flights
             journey_dict = journey.dict()
             journey_dict.pop("flights")
@@ -43,6 +46,7 @@ def post_trip(trip: schemas.TripBase, request_id: int):
         )
 
     logger.info("Trip posted to database")
+    return journey_dbs
 
 
 def post_journey():
@@ -68,7 +72,7 @@ def post_journey_flight(
 
 def post_request_journey(
     request_id: int, journey_dbs: list[models.Journey], price, session: Session
-):
+) -> models.RequestJourney:
     journey_id_1 = journey_dbs[0].id
     journey_id_2 = journey_dbs[1].id if len(journey_dbs) > 1 else None
 
@@ -92,7 +96,9 @@ def post_request_journey(
             journey_id_2=journey_id_2,
             price=price,
         )
-
-        session.add(models.RequestJourney(**association_schema.dict()))
+        association = models.RequestJourney(**association_schema.dict())
+        session.add(association)
 
     session.commit()
+    session.refresh(association)
+    return association
